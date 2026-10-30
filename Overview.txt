@@ -1,0 +1,218 @@
+IoT-BASED SMART IRRIGATION SYSTEM
+=================================
+
+An IoT-based smart irrigation solution designed to monitor soil moisture and
+environmental conditions across two farms. The system uses ESP32, ESP8266
+NodeMCU, and Telegram Bot integration to automate irrigation, control water
+pumps remotely, and provide real-time farm updates.
+
+
+PROJECT OVERVIEW
+----------------
+
+This project aims to improve agricultural water management through IoT
+technology. It monitors soil moisture levels in two different farms and
+automatically controls water pumps according to soil conditions and rainfall.
+
+Farmers can remotely monitor and manage irrigation operations through a
+Telegram Bot. The ESP32-CAM module also allows users to capture and receive
+field images through Telegram.
+
+
+FEATURES
+--------
+
+- Dual-Farm Monitoring: Monitors soil moisture levels in two separate farms.
+- Automatic Irrigation: Operates water pumps based on soil moisture and rainfall.
+- Manual Pump Control: Allows individual control of both water pumps through Telegram.
+- Telegram Bot Integration: Provides remote access to irrigation controls and farm information.
+- Environmental Monitoring: Measures temperature, humidity, and rainfall.
+- ESP32-CAM Integration: Captures field images and sends them through Telegram.
+- Real-Time Status: Displays moisture levels, pump conditions, and environmental information.
+- Sensor Failure Alerts: Notifies users when farm sensor data is unavailable.
+
+
+HARDWARE REQUIREMENTS
+--------------------
+
+Component                         Quantity
+--------------------------------  --------
+ESP32 Development Board           1
+ESP32-CAM Module                  1
+ESP8266 NodeMCU                   2
+Soil Moisture Sensors             2
+DHT11 Sensor                      1
+YL-83 Rain Sensor                 1
+2-Channel Relay Modules           2
+Water Pumps                       2
+5V Power Adapter                  1
+12V Power Supply                  1
+
+
+SOFTWARE AND TECHNOLOGIES
+-------------------------
+
+- Arduino IDE
+- Embedded C/C++
+- ESP32 and ESP8266
+- Wi-Fi Communication
+- ESP-NOW Protocol
+- Telegram Bot API
+- DHT Sensor Library
+- Universal Telegram Bot Library
+
+
+SYSTEM ARCHITECTURE
+-------------------
+
+The system consists of three main sections:
+
+1. FARM MONITORING (ESP8266 NodeMCU)
+   - Each NodeMCU is connected to a soil moisture sensor.
+   - Collects moisture readings from its respective farm.
+   - Sends sensor data wirelessly to the ESP32 using ESP-NOW.
+
+2. MAIN CONTROLLER (ESP32)
+   - Receives moisture readings from both farms.
+   - Monitors temperature, humidity, and rainfall.
+   - Processes sensor information and irrigation conditions.
+   - Controls two water pumps through relay modules.
+   - Communicates with the ESP32-CAM through serial communication.
+
+3. TELEGRAM AND CAMERA INTERFACE (ESP32-CAM)
+   - Connects to Wi-Fi and Telegram Bot.
+   - Receives commands from the user.
+   - Sends pump control commands to the main ESP32.
+   - Captures and sends field images.
+   - Displays farm status through Telegram.
+
+
+WORKING PRINCIPLE
+-----------------
+
+1. Soil moisture sensors collect readings from both farms.
+2. ESP8266 NodeMCU boards transmit the readings to the ESP32 using ESP-NOW.
+3. ESP32 processes the received moisture values and environmental sensor data.
+4. If the soil is dry and rainfall is not detected, the corresponding water
+   pump starts automatically.
+5. When sufficient soil moisture is reached or rainfall is detected, the pump
+   stops.
+6. The Telegram Bot allows users to monitor farm conditions and control pumps
+   remotely.
+7. ESP32-CAM captures field images when the user requests a photo.
+
+
+TELEGRAM BOT CONTROLS
+---------------------
+
+Command       Function
+------------  ----------------------------------------
+P1 ON         Start Farm 1 pump
+P1 OFF        Stop Farm 1 pump
+P2 ON         Start Farm 2 pump
+P2 OFF        Stop Farm 2 pump
+MANUAL1       Enable manual mode for Farm 1
+AUTO1         Enable automatic mode for Farm 1
+MANUAL2       Enable manual mode for Farm 2
+AUTO2         Enable automatic mode for Farm 2
+PHOTO         Capture a field image
+STATUS        Display current farm information
+
+
+MONITORING INFORMATION
+----------------------
+
+The Telegram Bot provides:
+
+- Soil moisture percentage of Farm 1 and Farm 2.
+- Water pump ON/OFF status.
+- Temperature readings.
+- Humidity readings.
+- Rain detection status.
+- Manual or automatic operating mode.
+- Date and time of status updates.
+
+
+PROJECT STRUCTURE
+-----------------
+
+IoT-Smart-Irrigation-System/
+|
+|-- esp32_smartfarm.ino
+|   Main ESP32 controller code
+|
+|-- esp32cam_telegram.ino
+|   ESP32-CAM and Telegram Bot code
+|
+|-- Nodemcu_Farm1.ino
+|   Farm 1 soil monitoring code
+|
+|-- Nodemcu_Farm2.ino
+|   Farm 2 soil monitoring code
+|
+|-- README.txt
+    Project documentation
+
+
+INSTALLATION AND SETUP
+-----------------------
+
+1. Download and install the Arduino IDE.
+2. Install the required ESP32 and ESP8266 board packages.
+3. Install the required libraries, including DHT Sensor Library and
+   Universal Telegram Bot.
+4. Open the respective .ino files in Arduino IDE.
+5. Configure Wi-Fi credentials and Telegram Bot settings in the ESP32-CAM code.
+6. Configure the ESP32 receiver MAC address in both NodeMCU programs.
+7. Connect the sensors, relay modules, and other hardware according to the
+   circuit connections.
+8. Upload the programs to their respective microcontrollers.
+9. Start the Telegram Bot using the /start command.
+10. Monitor and control the irrigation system through Telegram.
+
+
+ADVANTAGES
+----------
+
+- Reduces unnecessary water consumption.
+- Automates irrigation operations.
+- Supports monitoring of multiple farms.
+- Provides remote access through Telegram.
+- Reduces the need for continuous manual supervision.
+- Improves irrigation management and convenience.
+
+
+FUTURE SCOPE
+------------
+
+- Integration of AI-based irrigation prediction.
+- Cloud-based data storage and visualization.
+- Mobile application for advanced farm monitoring.
+- GPS-based farm monitoring.
+- Advanced soil health analysis.
+- Weather forecast integration for smarter irrigation decisions.
+
+
+PROJECT INFORMATION
+-------------------
+
+Project Domain:        Internet of Things (IoT) and Smart Agriculture
+Project Type:          Academic / Engineering Project
+Programming Language:  Embedded C/C++
+Controllers:           ESP32 and ESP8266 NodeMCU
+
+
+LICENSE
+-------
+
+This project is intended for educational and academic purposes. You are
+welcome to explore and modify the code with appropriate attribution.
+
+
+SECURITY NOTE
+-------------
+
+Before making the repository public, remove all real Wi-Fi credentials and
+Telegram Bot tokens from the source code. If a real token has already been
+exposed, revoke it through BotFather and generate a new one. Store credentials
+locally or in a separate configuration file that is excluded from Git.
